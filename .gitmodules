@@ -1,0 +1,3 @@
+[submodule "Assets/treeviewlib"]
+	path = Assets/treeviewlib
+	url = git@gitlab.com:treeviewstudios/treeviewlib.git
