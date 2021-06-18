@@ -7,6 +7,8 @@ using Unity.VectorGraphics;
 [ExecuteInEditMode]
 public class Spline : MonoBehaviour
 {
+    [SerializeField] public float SamplingStepSize = 0.01f;
+
     public Transform[] controlPoints;
 
     private Scene m_Scene;
@@ -32,7 +34,7 @@ public class Spline : MonoBehaviour
             StepDistance = 1000.0f,
             MaxCordDeviation = 0.05f,
             MaxTanAngleDeviation = 0.05f,
-            SamplingStepSize = 0.01f
+            SamplingStepSize = this.SamplingStepSize// 0.01f
         };
 
         // Instantiate a new mesh, it will be filled with data in Update()
@@ -50,6 +52,8 @@ public class Spline : MonoBehaviour
         m_Path.Contours[0].Segments[0].P1 = (Vector2)controlPoints[1].localPosition;
         m_Path.Contours[0].Segments[0].P2 = (Vector2)controlPoints[2].localPosition;
         m_Path.Contours[0].Segments[1].P0 = (Vector2)controlPoints[3].localPosition;
+
+        m_Options.SamplingStepSize = this.SamplingStepSize;
 
         // Tessellate the vector scene, and fill the mesh with the resulting geometry.
         var geoms = VectorUtils.TessellateScene(m_Scene, m_Options);

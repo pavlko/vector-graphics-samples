@@ -13,6 +13,7 @@ public class SplinesCreator : MonoBehaviour
 
     //[SerializeField] Toggle 
     [SerializeField] InputField textSplinesNumber;
+    [SerializeField] InputField textSplinesSamplingStep;
     [SerializeField] Button instantiateButton;
 
     List<Spline> splines = new List<Spline>();
@@ -32,6 +33,7 @@ public class SplinesCreator : MonoBehaviour
         splines = new List<Spline>();
 
         int n = int.Parse(textSplinesNumber.text);
+        float samplingStep = float.Parse(textSplinesSamplingStep.text);
         Vector3 lPos = Vector3.zero;
         for(int i=0; i<n; i++)
         {
@@ -39,6 +41,7 @@ public class SplinesCreator : MonoBehaviour
             go.transform.localPosition = lPos;
 
             var spline = go.GetComponent<Spline>();
+            spline.SamplingStepSize = samplingStep;
             splines.Add(spline);
 
             lPos += splinesGap;
